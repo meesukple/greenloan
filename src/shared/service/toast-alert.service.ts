@@ -34,6 +34,12 @@ export class AlertService {
   error(){
     this.show('error','ข้อผิดพลาด');
   }
+  idCardincomplete(){
+    this.show('error','กรุณากรอกหมายเลขบัตรประชาชนให้ครบ 13 หลัก');
+  }
+  phoneincomplete(){
+    this.show('error','กรุณากรอกหมายเลขโทรศัพท์ให้ครบ 10 หลัก');
+  }
   incomplete(){
     this.show('error','กรุณากรอกข้อมูลให้ครบถ้วน');
   }

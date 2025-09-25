@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern(/^(0[689]{1})+([0-9]{8})$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       salary: [0],
       loan: [0, [Validators.required]],
     });
@@ -217,6 +217,9 @@ export class HomeComponent implements OnInit {
       this.alertService.incomplete()
       return;
     }
+    this.step++;
+    this.progress = (this.step / 5) * 100;
+    return;
     const formData = new FormData();
     const fg = this.formGroupFile;
 
@@ -290,10 +293,15 @@ export class HomeComponent implements OnInit {
     const addressControl = this.formGroup.get('address');
     const phoneControl = this.formGroup.get('phone');
 
-    if (!idCardControl || idCardControl.invalid ||
+    if(!idCardControl || idCardControl.invalid){
+      this.alertService.idCardincomplete()
+      return;
+    } else if (!phoneControl || phoneControl.invalid) {
+      this.alertService.phoneincomplete()
+      return;
+    } else if (
        !firstNameControl || firstNameControl.invalid || 
        !lastNameControl || lastNameControl.invalid || 
-       !phoneControl || phoneControl.invalid || 
        !addressControl || addressControl.invalid) {
       this.alertService.incomplete()
       return;

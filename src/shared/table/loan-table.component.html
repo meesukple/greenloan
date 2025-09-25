@@ -1,23 +1,34 @@
 <!-- loan-table.component.html -->
 <table
-  class="w-full table-fixed text-left text-teal-900 border-collapse border-spacing-0"
+  class="w-full text-left text-teal-900 border-collapse border-spacing-0"
   *ngIf="!loading"
 >
-  <thead class="bg-teal-200/50 text-sm uppercase text-teal-900 text-center">
+  <thead class="bg-teal-200/50 text-sm text-teal-900 text-center">
     <tr>
-      <th class="py-4">รหัสใบสมัคร</th>
-      <th class="py-4">ชื่อผู้สมัคร</th>
-      <th class="py-4">เงินเดือน</th>
-      <th class="py-4">วงเงินสินเชื่อ</th>
-      <th class="py-4">สถานะ</th>
-      <th class="py-4">AML</th>
-      <th class="py-4">สถานะบัญชีม้า</th>
-      <th class="py-4">Boycott Flag</th>
-      <th class="py-4">KYC/CDD</th>
-      <th class="py-4">Green Loan Score</th>
-      <th class="py-4">Credit Bureau</th>
-      <th class="py-4">Dept Service Ratio (DSR)</th>
-      <th class="py-4">วันที่สมัคร</th>
+      <th class="py-4" rowspan="3">รหัสใบสมัคร</th>
+      <th class="py-4" rowspan="3">ชื่อผู้สมัคร</th>
+      <th class="py-4" rowspan="3">เงินเดือน</th>
+      <th class="py-4" rowspan="3">วงเงินสินเชื่อ</th>
+      <th class="py-4" rowspan="3">สถานะ</th>
+      <th class="bg-teal-300 font-semibold border border-white" colspan="7">Criteria</th>
+      <th class="py-4" rowspan="3">วันที่สมัคร</th>
+    </tr>
+
+    <tr>
+      <th class="bg-teal-300 font-semibold border border-white" colspan="4">ปปง.</th>
+      <th class="bg-teal-300 font-semibold border border-white" colspan="1">ESG</th>
+      <th class="bg-teal-300 font-semibold border border-white" colspan="1">Credit Bureau</th>
+      <th class="bg-teal-300 font-semibold border border-white" colspan="1">ความสามารถในการชำระหนี้</th>
+    </tr>
+
+    <tr>
+      <th class="py-4 text-xs whitespace-nowrap">AML</th>
+      <th class="py-4 text-xs whitespace-nowrap">สถานะบัญชีม้า</th>
+      <th class="py-4 text-xs whitespace-nowrap">Boycott Flag</th>
+      <th class="py-4 text-xs whitespace-nowrap">KYC/CDD</th>
+      <th class="py-4 text-xs whitespace-nowrap">Green Loan Score</th>
+      <th class="py-4 text-xs whitespace-nowrap">Credit Bureau</th>
+      <th class="py-4 text-xs whitespace-nowrap">Debt Service Ratio (DSR)</th>
     </tr>
   </thead>
 
