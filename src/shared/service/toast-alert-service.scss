@@ -1,0 +1,51 @@
+$success-color: #08C3B1;
+$success-light-color:#53e1d3;
+$error-color:#FA4549;
+$error-light-color:#f3cdc8;
+$warning-color:#FFD54F;
+$warning-light-color:#F9EEC8;
+
+.colored-toast.swal2-icon-success {
+    background-color: $success-color !important;
+    border-bottom: 5px solid $success-light-color;
+}
+.colored-toast.swal2-icon-error {
+    background-color: $error-color !important;
+    border-bottom: 5px solid $error-light-color;
+}  
+.colored-toast.swal2-icon-warning {
+    background-color: $warning-color !important;
+    border-bottom: 5px solid $warning-light-color;
+}  
+.colored-toast .swal2-title {
+    color: white !important;
+} 
+.colored-toast.swal2-icon-success .swal2-close {
+    color: #9EFFF6 !important;
+} 
+.colored-toast.swal2-icon-error .swal2-close {
+    color: #F3CDC8 !important;
+} 
+.colored-toast.swal2-icon-warning .swal2-close {
+    color: $warning-light-color !important;
+} 
+
+.colored-toast .swal2-html-container {
+    color: white;
+}
+
+div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
+    background-color: #ffffff !important;
+}
+
+div:where(.swal2-icon).swal2-success .swal2-success-ring {
+    border: 0.25em solid rgb(255 255 255 / 30%) !important;
+}
+
+div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line] {
+    background-color: #ffffff !important;
+}
+
+
+
+  

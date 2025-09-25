@@ -1,0 +1,118 @@
+<!-- loan-table.component.html -->
+<table
+  class="w-full table-fixed text-left text-teal-900 border-collapse border-spacing-0"
+  *ngIf="!loading"
+>
+  <thead class="bg-teal-200/50 text-sm uppercase text-teal-900 text-center">
+    <tr>
+      <th class="py-4">รหัสใบสมัคร</th>
+      <th class="py-4">ชื่อผู้สมัคร</th>
+      <th class="py-4">เงินเดือน</th>
+      <th class="py-4">วงเงินสินเชื่อ</th>
+      <th class="py-4">สถานะ</th>
+      <th class="py-4">AML</th>
+      <th class="py-4">สถานะบัญชีม้า</th>
+      <th class="py-4">Boycott Flag</th>
+      <th class="py-4">KYC/CDD</th>
+      <th class="py-4">Green Loan Score</th>
+      <th class="py-4">Credit Bureau</th>
+      <th class="py-4">Dept Service Ratio (DSR)</th>
+      <th class="py-4">วันที่สมัคร</th>
+    </tr>
+  </thead>
+
+  <tbody class="text-base">
+    <tr
+      *ngFor="let app of apps"
+      class="border-b border-teal-200/50 hover:bg-teal-100 transition-colors text-center"
+    >
+      <td class="py-4 font-medium whitespace-nowrap">{{ app.id }}</td>
+      <td class="py-4">{{ app.name }}</td>
+      <td class="py-4">{{ app.salary | number:'1.0-0' }}</td>
+      <td class="py-4">{{ app.loan | number:'1.0-0' }}</td>
+      <td class="py-4">
+        <span
+          class="inline-flex items-center p-2 rounded-full text-sm font-medium"
+          [ngClass]="{
+            'bg-green-200 text-green-900': app.status === '0',
+            'bg-red-200 text-red-900': app.status === '1'
+          }"
+        >
+          {{ app.status === '0' ? 'อนุมัติ' : app.status === '1' ? 'ปฏิเสธ' : '' }}
+        </span>
+      </td>
+      <td class="py-4">
+        <span
+          class="inline-flex items-center p-2 rounded-full text-sm font-medium"
+          [ngClass]="{
+            'bg-red-200 text-red-900': app.aml === '3'
+          }"
+        >
+          {{ app.aml === '0' ? 'ปกติ' : app.aml === '1' ? 'เสี่ยงสูง' : app.aml === '2' ? 'เสี่ยงปานกลาง' : app.aml === '3' ? 'ห้ามทำธุรกรรม' : '' }}
+        </span>
+      </td>
+      <td class="py-4">
+        <span
+          class="inline-flex items-center p-2 rounded-full text-sm font-medium"
+          [ngClass]="{
+            'bg-red-200 text-red-900': app.mule === '1' || app.mule === '2' || app.mule === '3' || app.mule === '4'
+          }"
+        >
+          {{ app.mule === '0' ? 'ปกติ' : app.mule === '1' ? 'ม้าดำ' : app.mule === '2' ? 'ม้าเทาเข้ม' : app.mule === '3' ? 'ม้าเทาอ่อน' : app.mule === '4' ? 'ม้าน้ำตาล' : '' }}
+        </span>
+      </td>
+      <td class="py-4">
+        <span
+          class="inline-flex items-center p-2 rounded-full text-sm font-medium"
+          [ngClass]="{
+            'bg-red-200 text-red-900': app.boycott === '1'
+          }"
+        >
+          {{ app.boycott === '0' ? 'ปกติ' : app.boycott === '1' ? 'KP - North Korea' : '' }}
+        </span>
+      </td>
+      <td class="py-4">
+        <span
+          class="inline-flex items-center p-2 rounded-full text-sm font-medium"
+        >
+          {{ app.kyc === '1' ? 'เสี่ยงต่ำ' : app.kyc === '2' ? 'เสี่ยงกลาง' : app.kyc === '3' ? 'เสี่ยงสูง' : '' }}
+        </span>
+      </td>
+      <td class="py-4">
+        <span
+          class="inline-flex items-center p-2 rounded-full text-sm font-medium"
+          [ngClass]="{
+            'bg-red-200 text-red-900': +app.score < 50
+          }"
+        >
+          {{ app.score }}
+        </span>
+      </td>
+      <td class="py-4">
+        <span
+          class="inline-flex items-center p-2 rounded-full text-sm font-medium"
+          [ngClass]="{
+            'bg-red-200 text-red-900': app.creditBureau === '1'
+          }"
+        >
+          {{ app.creditBureau === '0' ? 'ปกติ' : app.creditBureau === '1' ? 'ติดเครดิตบูโร' : '' }}
+        </span>
+      </td>
+      <td class="py-4">
+        <span
+          class="inline-flex items-center p-2 rounded-full text-sm font-medium"
+          [ngClass]="{
+            'bg-red-200 text-red-900': +app.dsr < 80
+          }"
+        >
+          {{ app.dsr }}
+        </span>
+      </td>
+      <td class="py-4">{{ app.date }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="loading" class="p-4 text-center text-teal-700">
+  กำลังโหลดข้อมูล...
+</div>

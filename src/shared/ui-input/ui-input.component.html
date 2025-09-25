@@ -1,0 +1,69 @@
+<div [class]="styleClass" 
+     [ngClass]="{
+       'grid-style gap-2': inputConfig.isLabelLeftSide && (!isWorkshipNameInput || !isBudgetInput || !isIncomeInput),
+       'flex-style gap-2': isWorkshipNameInput || isBudgetInput || isIncomeInput
+     }">
+
+  <!-- Label -->
+  <label *ngIf="!(label === '')"
+         [class]="styleClassLabel"
+         [ngClass]="{'pt-1.5': inputConfig.isLabelLeftSide}"
+         class="block text-black text-base font-semibold leading-normal whitespace-nowrap">
+    {{ label }}
+    <span *ngIf="isRequired" class="text-red-500 px-[2px]">*</span>
+    <span *ngIf="inputConfig.isLabelLeftSide">:</span>
+  </label>
+
+  <!-- Input container -->
+  <div class="flex flex-1 items-center gap-2 w-full" [class]="styleClassInputBox">
+    <div class="relative w-full">
+
+      <nz-form-item>
+        <nz-form-control>
+
+          <!-- Input group -->
+          <nz-input-group 
+            [nzStatus]="checkInvalid() ? 'error' : ''" 
+            [class]="styleClassInputGroup" 
+            class="rounded-md w-full">
+            <input nz-input
+                   class="rounded-md w-full px-3 py-2 text-base"
+                   [type]="inputConfig.type"
+                   [placeholder]="placeholder"
+                   [formControl]="inputConfig.formControl"
+                   [maxLength]="maxLength"
+                   (keyup)="setErrorMessage()"
+                   (ngModelChange)="onValueChange($event)"
+                   (change)="onFormControlChange()"
+                   [class]="styleClassInput" />
+            <ng-template #suffixTemplate>
+              <span nz-icon 
+                    [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                    class="cursor-pointer"
+                    *ngIf="inputConfig.type === 'password'"
+                    (click)="passwordVisible = !passwordVisible"></span>
+            </ng-template>
+          </nz-input-group>
+
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Error message -->
+      <div *ngIf="checkInvalid()" 
+           role="alert" 
+           class="mt-1 text-red-500 text-sm whitespace-nowrap"
+           [@fadeInSlideUp]>
+        {{ errorMessage }}
+      </div>
+
+    </div>
+
+    <!-- Unit display -->
+    <div *ngIf="!(unit === '')"
+         [class]="styleClassUnit"
+         class="text-black text-base leading-normal pl-2 pt-1.5 whitespace-nowrap">
+      {{ unit }}
+    </div>
+
+  </div>
+</div>

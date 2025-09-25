@@ -1,0 +1,76 @@
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans+Thai%3Awght%40400%3B500%3B700%3B900&amp;family=Public+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+
+<ng-container *ngIf="true">
+  <div
+    class="relative flex min-h-screen flex-col bg-gradient-to-b from-[#2A8E9E] to-[#3CB5B9] text-gray-900"
+    style='font-family: "Noto Sans Thai", "Public Sans", sans-serif;'
+  >
+    <!-- Header -->
+    <header
+      class="flex items-center justify-between border-b border-white/30 md:px-10 py-4 text-white"
+    >
+      <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-3xl">real_estate_agent</span>
+        <h2 class="text-xl font-bold">Green Mortgage</h2>
+      </div>
+      <nav class="flex items-center gap-6 text-sm font-medium text-white/80">
+        <a class="hover:text-white" routerLink="/home">Home</a>
+        <a class="text-white font-semibold border-b-2 border-white pb-1" routerLink="/dashboard"
+          >Admin</a
+        >
+      </nav>
+    </header>
+
+    <!-- Main -->
+    <main class="flex-1 px-10 py-8">
+      <div class="mx-auto max-w-7xl">
+        <!-- Title -->
+        <h2 class="mb-8 text-4xl font-bold tracking-tight text-white">รายงานสรุป</h2>
+
+        <!-- Status Cards -->
+        <section class="space-y-10">
+          <h3 class="mb-4 text-xl font-semibold leading-tight tracking-tight text-white">
+            สถานะใบสมัคร
+          </h3>
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div
+              class="flex flex-col gap-2 rounded-lg bg-[#607D8B] p-6 shadow-lg backdrop-blur-sm"
+            >
+              <p class="text-base font-medium text-white/90">ใบสมัครทั้งหมด</p>
+              <p class="text-4xl font-bold tracking-tight text-white">120</p>
+            </div>
+            <div
+              class="flex flex-col gap-2 rounded-lg bg-[#4DB6AC] p-6 shadow-lg backdrop-blur-sm"
+            >
+              <p class="text-base font-medium text-white/90">อนุมัติแล้ว</p>
+              <p class="text-4xl font-bold tracking-tight text-white">85</p>
+            </div>
+            <div
+              class="flex flex-col gap-2 rounded-lg bg-[#FFD54F] p-6 shadow-lg backdrop-blur-sm"
+            >
+              <p class="text-base font-medium text-gray-800">รอดำเนินการ</p>
+              <p class="text-4xl font-bold tracking-tight text-gray-900">35</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Table -->
+        <section class="pt-4">
+          <h3
+            class="pb-4 text-2xl font-bold leading-tight tracking-[-0.015em] text-white"
+          >
+            ข้อมูลใบสมัครโดยละเอียด
+          </h3>
+          <div
+            class="overflow-x-auto rounded-lg border border-teal-200/50 bg-[#F0FFFF] shadow-lg"
+          >
+            <app-loan-table></app-loan-table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</ng-container>

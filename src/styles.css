@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+@import './shared/service/toast-alert-service.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Noto Sans Thai',"Public Sans", sans-serif;
+}
