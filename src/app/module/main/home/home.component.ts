@@ -217,9 +217,6 @@ export class HomeComponent implements OnInit {
       this.alertService.incomplete()
       return;
     }
-    this.step++;
-    this.progress = (this.step / 5) * 100;
-    return;
     const formData = new FormData();
     const fg = this.formGroupFile;
 
