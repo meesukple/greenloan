@@ -22,10 +22,10 @@
     </tr>
 
     <tr>
-      <th class="py-4 text-xs whitespace-nowrap">AML</th>
+      <th class="py-4 text-xs whitespace-nowrap">AML Status</th>
       <th class="py-4 text-xs whitespace-nowrap">สถานะบัญชีม้า</th>
       <th class="py-4 text-xs whitespace-nowrap">Boycott Flag</th>
-      <th class="py-4 text-xs whitespace-nowrap">KYC/CDD</th>
+      <th class="py-4 text-xs whitespace-nowrap">KYC/CDD Status</th>
       <th class="py-4 text-xs whitespace-nowrap">Green Loan Score</th>
       <th class="py-4 text-xs whitespace-nowrap">Credit Bureau</th>
       <th class="py-4 text-xs whitespace-nowrap">Debt Service Ratio (DSR)</th>
@@ -37,10 +37,10 @@
       *ngFor="let app of apps"
       class="border-b border-teal-200/50 hover:bg-teal-100 transition-colors text-center"
     >
-      <td class="py-4 font-medium whitespace-nowrap">GML{{ app.id.toString().padStart(7, '0') }}</td>
-      <td class="py-4">{{ app.name }}</td>
-      <td class="py-4">{{ app.salary | number:'1.0-0' }}</td>
-      <td class="py-4">{{ app.loan | number:'1.0-0' }}</td>
+      <td class="text-sm py-4 font-medium whitespace-nowrap">GML{{ app.id.toString().padStart(7, '0') }}</td>
+      <td class="text-sm py-4">{{ app.name }}</td>
+      <td class="text-sm py-4 text-right">{{ app.salary | number:'1.0-0' }}</td>
+      <td class="text-sm py-4 text-right">{{ app.loan | number:'1.0-0' }}</td>
       <td class="py-4">
         <span
           class="inline-flex items-center p-2 rounded-full text-sm font-medium"
@@ -59,7 +59,7 @@
             'bg-red-200 text-red-900': app.aml === '3'
           }"
         >
-          {{ app.aml === '0' ? 'ปกติ' : app.aml === '1' ? 'เสี่ยงสูง' : app.aml === '2' ? 'เสี่ยงปานกลาง' : app.aml === '3' ? 'ห้ามทำธุรกรรม' : '' }}
+          {{ app.aml === '0' ? '0 - ปกติ' : app.aml === '1' ? '1 - เสี่ยงสูง' : app.aml === '2' ? '1 - เสี่ยงสูง' : app.aml === '3' ? '3 - ห้ามทำธุรกรรม' : '' }}
         </span>
       </td>
       <td class="py-4">
@@ -86,12 +86,12 @@
         <span
           class="inline-flex items-center p-2 rounded-full text-sm font-medium"
         >
-          {{ app.kyc === '1' ? 'เสี่ยงต่ำ' : app.kyc === '2' ? 'เสี่ยงกลาง' : app.kyc === '3' ? 'เสี่ยงสูง' : '' }}
+          {{ app.kyc === '1' ? '1 - เสี่ยงต่ำ' : app.kyc === '2' ? '2 - เสี่ยงกลาง' : app.kyc === '3' ? '3 - เสี่ยงสูง' : '' }}
         </span>
       </td>
-      <td class="py-4">
+      <td class="py-4 text-right">
         <span
-          class="inline-flex items-center p-2 rounded-full text-sm font-medium"
+          class="inline-flex items-center text-right p-2 rounded-full text-sm font-medium"
           [ngClass]="{
             'bg-red-200 text-red-900': +app.score < 50
           }"
@@ -109,7 +109,7 @@
           {{ app.creditBureau === '0' ? 'ปกติ' : app.creditBureau === '1' ? 'ติดเครดิตบูโร' : '' }}
         </span>
       </td>
-      <td class="py-4">
+      <td class="py-4 text-right">
         <span
           class="inline-flex items-center p-2 rounded-full text-sm font-medium"
           [ngClass]="{
@@ -119,7 +119,7 @@
           {{ app.dsr }}
         </span>
       </td>
-      <td class="py-4">{{ app.date }}</td>
+        <td class="py-4 text-sm">{{ app.date | date:'dd/MM/yyyy' }}</td>
     </tr>
   </tbody>
 </table>
