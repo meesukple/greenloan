@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
   loanInputConfig!: inputConfigTm;
   countryDropdownSelectConfig!: selectConfigTm;
   customer: any = null;
+  customerId: any = null;
 
   stepLabels: string[] = [
     'รายละเอียดผลิตภัณฑ์',
@@ -69,11 +70,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.formGroup = this.fb.group({
-      idCard: ['', [Validators.required, Validators.pattern(/^\d{13}$/)]],
+      idNumber: ['', [Validators.required, Validators.pattern(/^\d{13}$/)]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       salary: [0],
       loan: [0, [Validators.required]],
     });
@@ -260,12 +261,12 @@ export class HomeComponent implements OnInit {
       const response = await axios.get(
         `https://green-morgage-testing.azurewebsites.net/verifyCustomerInfo?customerId=${responseCustomerId.data.result}`
       );
+      this.customerId = responseCustomerId.data.result;
       this.customer = response.data;
       this.cdr.detectChanges();
-      console.log('Customer data:', this.customer);
       
       this.formGroup.patchValue({
-        idCard: this.customer.idNumber || '',
+        idNumber: this.customer.idNumber || '',
         firstName: this.customer.firstNameTh || '',
         lastName: this.customer.lastNameTh || '',
         address: this.customer.address || ''
@@ -281,14 +282,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  nextStepForm(): void {
+  async nextStepForm(): Promise<void> {
     this.formGroup.markAllAsTouched();
 
-    const idCardControl = this.formGroup.get('idCard');
+    const idCardControl = this.formGroup.get('idNumber');
     const firstNameControl = this.formGroup.get('firstName');
     const lastNameControl = this.formGroup.get('lastName');
     const addressControl = this.formGroup.get('address');
-    const phoneControl = this.formGroup.get('phone');
+    const phoneControl = this.formGroup.get('phoneNumber');
+    const loanControl = this.formGroup.get('loan');
 
     if(!idCardControl || idCardControl.invalid){
       this.alertService.idCardincomplete()
@@ -299,10 +301,30 @@ export class HomeComponent implements OnInit {
     } else if (
        !firstNameControl || firstNameControl.invalid || 
        !lastNameControl || lastNameControl.invalid || 
-       !addressControl || addressControl.invalid) {
+       !addressControl || addressControl.invalid ||
+       !loanControl || loanControl.invalid) {
       this.alertService.incomplete()
       return;
     }
+
+    const payload = {
+      customerId: Number(this.customerId),
+      idNumber: idCardControl.value,
+      firstName: firstNameControl.value,
+      lastName: lastNameControl.value,
+      address: addressControl.value,
+      phoneNumber: phoneControl.value,
+      loan: parseFloat(loanControl.value)
+    };
+
+    await axios.post(
+      'https://green-morgage-testing.azurewebsites.net/loanAndAccountInfo',
+      payload,
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+
     this.step++;
     this.progress = (this.step / 5) * 100;
   }
@@ -327,7 +349,7 @@ export class HomeComponent implements OnInit {
     this.idCardInputConfig = {
       labelAndPlaceholderVariable: 'idCard',
       isLabelLeftSide: false,
-      formControl: this.formGroup.get('idCard'),
+      formControl: this.formGroup.get('idNumber'),
       type: 'string',
       formValidateType: ['required'],
       isDisabled: false,
@@ -352,7 +374,7 @@ export class HomeComponent implements OnInit {
     this.phoneInputConfig = {
       labelAndPlaceholderVariable: 'phone',
       isLabelLeftSide: false,
-      formControl: this.formGroup.get('phone'),
+      formControl: this.formGroup.get('phoneNumber'),
       type: 'string',
       formValidateType: ['required'],
       isDisabled: false,
