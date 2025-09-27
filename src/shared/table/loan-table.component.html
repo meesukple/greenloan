@@ -37,7 +37,7 @@
       *ngFor="let app of apps"
       class="border-b border-teal-200/50 hover:bg-teal-100 transition-colors text-center"
     >
-      <td class="py-4 font-medium whitespace-nowrap">{{ app.id }}</td>
+      <td class="py-4 font-medium whitespace-nowrap">GML{{ app.id.toString().padStart(7, '0') }}</td>
       <td class="py-4">{{ app.name }}</td>
       <td class="py-4">{{ app.salary | number:'1.0-0' }}</td>
       <td class="py-4">{{ app.loan | number:'1.0-0' }}</td>
