@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../../shared/service/toast-alert.service';
 import { inputConfigTm, selectConfigTm } from '../../../../shared/interface/input.interface';
+import { LoanApp, LoanAppService } from '../../../../shared/service/loan-app.service';
 
 @Component({
   selector: 'app-dash-board',
@@ -44,12 +45,15 @@ export class DashBoardComponent implements OnInit {
     { label: 'software developer', value: 'MM' },
     { label: 'นายก', value: 'BY' },
   ];
+  apps: LoanApp[] = [];
+  loading = true;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private alertService: AlertService,
+    private loanService: LoanAppService
   ) {
   }
 
@@ -65,6 +69,23 @@ export class DashBoardComponent implements OnInit {
     });
     this.initialComponent();
     this.setupComponentValue();
+    this.loanService.loadApps();
+    this.loanService.apps$.subscribe(data => {
+      this.apps = data;
+      this.loading = false;
+    });
+  }
+
+  get totalApps(): number {
+    return this.apps.length;
+  }
+
+  get approved(): number {
+    return this.apps.filter(a => a.status === '0').length;
+  }
+
+  get reject(): number {
+    return this.apps.filter(a => a.status === '1').length;
   }
 
   nextStepConsentForm() {
