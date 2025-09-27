@@ -1,22 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
-
-interface LoanApp {
-  id: string;
-  name: string;
-  salary: string;
-  loan: string;
-  status: string;
-  aml: string;
-  mule: string;
-  boycott: string;
-  creditBureau: string;
-  kyc: string;
-  score: string;
-  dsr: string;
-  date: string;
-}
+import { LoanApp, LoanAppService } from '../service/loan-app.service';
 
 @Component({
   selector: 'app-loan-table',
