@@ -69,11 +69,15 @@ export class DashBoardComponent implements OnInit {
     });
     this.initialComponent();
     this.setupComponentValue();
-    this.loanService.loadApps();
-    this.loanService.apps$.subscribe(data => {
-      this.apps = data;
-      this.loading = false;
-    });
+    this.loading = true;
+    this.loanService.loadApps()
+      .then(() => {
+        this.loanService.apps$.subscribe(data => {
+          this.apps = data;
+          this.loading = false;
+        });
+      })
+      .catch(() => this.loading = false);
   }
 
   get totalApps(): number {
