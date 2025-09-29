@@ -675,19 +675,54 @@
               </p>
             </li>
 
-            <!-- 7.2 Sanitary -->
+            <!-- 7.2 Rain Water Harvesting -->
             <li class="flex flex-col">
               <div class="flex justify-between items-center">
-                <span>7.2 ใช้สุขภัณฑ์ประหยัดน้ำ</span>
+                <span>7.2 มีระบบกักเก็บน้ำฝนเพื่อใช้ประโยชน์</span>
                 <input
                   type="file"
                   class="hidden"
                   id="file15"
-                  (change)="onFileSelected($event, 'waterDocs.waterSavingToiletsFile')"
+                  (change)="onFileSelected($event, 'waterDocs.rainwaterHarvestingFile')"
                 />
                 <button
                   type="button"
                   (click)="triggerFile('file15')"
+                  class="bg-gray-400 text-white px-3 py-1 rounded flex items-center space-x-1"
+                >
+                  <i class="fas fa-upload ms-1"></i>
+                  <span>เลือกไฟล์</span>
+                </button>
+              </div>
+              <p
+                *ngIf="formGroupFile.get('waterDocs.rainwaterHarvestingFile')?.value"
+                class="mt-1 text-sm text-gray-600 break-words"
+              >
+                {{ formGroupFile.get('waterDocs.rainwaterHarvestingFile')?.value?.name }}
+                <button
+                  *ngIf="formGroupFile.get('waterDocs.rainwaterHarvestingFile')?.value"
+                  type="button"
+                  class="text-red-500 text-sm underline ml-2"
+                  (click)="removeFile('waterDocs.rainwaterHarvestingFile')"
+                >
+                  ลบไฟล์
+                </button>
+              </p>
+            </li>
+
+            <!-- 7.3 Water Saving Toilets -->
+            <li class="flex flex-col">
+              <div class="flex justify-between items-center">
+                <span>7.3 ใช้สุขภัณฑ์ประหยัดน้ำ</span>
+                <input
+                  type="file"
+                  class="hidden"
+                  id="file16"
+                  (change)="onFileSelected($event, 'waterDocs.waterSavingToiletsFile')"
+                />
+                <button
+                  type="button"
+                  (click)="triggerFile('file16')"
                   class="bg-gray-400 text-white px-3 py-1 rounded flex items-center space-x-1"
                 >
                   <i class="fas fa-upload ms-1"></i>
@@ -723,12 +758,12 @@
                 <input
                   type="file"
                   class="hidden"
-                  id="file16"
+                  id="file17"
                   (change)="onFileSelected($event, 'materialDocs.ecoFriendlyMaterialsFile')"
                 />
                 <button
                   type="button"
-                  (click)="triggerFile('file16')"
+                  (click)="triggerFile('file17')"
                   class="bg-gray-400 text-white px-3 py-1 rounded flex items-center space-x-1"
                 >
                   <i class="fas fa-upload ms-1"></i>
@@ -758,12 +793,12 @@
                 <input
                   type="file"
                   class="hidden"
-                  id="file17"
+                  id="file18"
                   (change)="onFileSelected($event, 'materialDocs.wasteManagementSystemFile')"
                 />
                 <button
                   type="button"
-                  (click)="triggerFile('file17')"
+                  (click)="triggerFile('file18')"
                   class="bg-gray-400 text-white px-3 py-1 rounded flex items-center space-x-1"
                 >
                   <i class="fas fa-upload ms-1"></i>
@@ -780,6 +815,76 @@
                   type="button"
                   class="text-red-500 text-sm underline ml-2"
                   (click)="removeFile('materialDocs.wasteManagementSystemFile')"
+                >
+                  ลบไฟล์
+                </button>
+              </p>
+            </li>
+
+            <!-- 8.3 Green Space -->
+            <li class="flex flex-col">
+              <div class="flex justify-between items-center">
+                <span>8.3 มีพื้นที่สีเขียวในโครงการมากกว่า 30% ของพื้นที่ทั้งหมด</span>
+                <input
+                  type="file"
+                  class="hidden"
+                  id="file19"
+                  (change)="onFileSelected($event, 'materialDocs.greenSpaceFile')"
+                />
+                <button
+                  type="button"
+                  (click)="triggerFile('file19')"
+                  class="bg-gray-400 text-white px-3 py-1 rounded flex items-center space-x-1"
+                >
+                  <i class="fas fa-upload ms-1"></i>
+                  <span>เลือกไฟล์</span>
+                </button>
+              </div>
+              <p
+                *ngIf="formGroupFile.get('materialDocs.greenSpaceFile')?.value"
+                class="mt-1 text-sm text-gray-600 break-words"
+              >
+                {{ formGroupFile.get('materialDocs.greenSpaceFile')?.value?.name }}
+                <button
+                  *ngIf="formGroupFile.get('materialDocs.greenSpaceFile')?.value"
+                  type="button"
+                  class="text-red-500 text-sm underline ml-2"
+                  (click)="removeFile('materialDocs.greenSpaceFile')"
+                >
+                  ลบไฟล์
+                </button>
+              </p>
+            </li>
+
+            <!-- 8.4 Near Public Transport -->
+            <li class="flex flex-col">
+              <div class="flex justify-between items-center">
+                <span>8.4 ตั้งอยู่ใกล้ระบบขนส่งสาธารณะในระยะเดินไม่เกิน 500 เมตร</span>
+                <input
+                  type="file"
+                  class="hidden"
+                  id="file20"
+                  (change)="onFileSelected($event, 'materialDocs.nearPublicTransportFile')"
+                />
+                <button
+                  type="button"
+                  (click)="triggerFile('file20')"
+                  class="bg-gray-400 text-white px-3 py-1 rounded flex items-center space-x-1"
+                >
+                  <i class="fas fa-upload ms-1"></i>
+                  <span>เลือกไฟล์</span>
+                </button>
+              </div>
+              <p
+                *ngIf="formGroupFile.get('materialDocs.nearPublicTransportFile')?.value"
+                class="mt-1 text-sm text-gray-600 break-words"
+              >
+                {{ formGroupFile.get('materialDocs.nearPublicTransportFile')?.value?.name }}
+                <button
+                  *ngIf="formGroupFile.get('materialDocs.nearPublicTransportFile')?.value"
+                  type="button"
+                  class="text-red-500 text-sm underline ml-2"
+                  (click)="removeFile('materialDocs.nearPublicTransportFile')"
                 >
                   ลบไฟล์
                 </button>
@@ -841,8 +946,8 @@
         <h4 class="font-semibold mb-2">รายการเดินบัญชี</h4>
         <ul class="space-y-2">
           <li class="flex items-center">
-            <span [ngClass]="customer?.bankStatement ? 'text-green-600' : 'text-gray-400'">
-              <i [class]="customer?.bankStatement ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
+            <span [ngClass]="formGroupFile.get('bankStatement')?.value ? 'text-green-600' : 'text-gray-400'">
+              <i [class]="formGroupFile.get('bankStatement')?.value ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
             </span>
             <label for="bankStatement">รายการเดินบัญชี</label>
           </li>
@@ -853,8 +958,8 @@
         <h4 class="font-semibold mb-2">Credit Bureau</h4>
         <ul class="space-y-2">
           <li class="flex items-center">
-            <span [ngClass]="customer?.creditBureau ? 'text-green-600' : 'text-gray-400'">
-              <i [class]="customer?.creditBureau ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
+            <span [ngClass]="formGroupFile.get('creditBureau')?.value ? 'text-green-600' : 'text-gray-400'">
+              <i [class]="formGroupFile.get('creditBureau')?.value ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
             </span>
             <label for="creditBureau">Credit Bureau</label>
           </li>
@@ -865,20 +970,20 @@
         <h4 class="font-semibold mb-2">เอกสารด้านภาระหนี้</h4>
         <ul class="space-y-2">
           <li class="flex items-center">
-            <span [ngClass]="customer?.housing ? 'text-green-600' : 'text-gray-400'">
-              <i [class]="customer?.housing ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
+            <span [ngClass]="formGroupFile.get('debtDocs.housing')?.value ? 'text-green-600' : 'text-gray-400'">
+              <i [class]="formGroupFile.get('debtDocs.housing')?.value ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
             </span>
             <label for="housing">ใบเสร็จผ่อนชำระที่อยู่อาศัย</label>
           </li>
           <li class="flex items-center">
-            <span [ngClass]="customer?.creditCard ? 'text-green-600' : 'text-gray-400'">
-              <i [class]="customer?.creditCard ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
+            <span [ngClass]="formGroupFile.get('debtDocs.creditCard')?.value ? 'text-green-600' : 'text-gray-400'">
+              <i [class]="formGroupFile.get('debtDocs.creditCard')?.value ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
             </span>
             <label for="creditCard">ใบเสร็จผ่อนชำระบัตรเครดิต</label>
           </li>
           <li class="flex items-center">
-            <span [ngClass]="customer?.others ? 'text-green-600' : 'text-gray-400'">
-              <i [class]="customer?.others ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
+            <span [ngClass]="formGroupFile.get('debtDocs.others')?.value ? 'text-green-600' : 'text-gray-400'">
+              <i [class]="formGroupFile.get('debtDocs.others')?.value ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
             </span>
             <label for="others">ใบเสร็จผ่อนชำระอื่นๆ</label>
           </li>
@@ -937,6 +1042,12 @@
             <label for="waterTreatmentSystemFile">มีระบบบำบัดน้ำเสียเพื่อนำกลับมาใช้ใหม่</label>
           </li>
           <li class="flex items-center">
+            <span [ngClass]="customer?.hasRainwaterHarvesting ? 'text-green-600' : 'text-gray-400'">
+              <i [class]="customer?.hasRainwaterHarvesting ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
+            </span>
+            <label for="waterTreatmentSystemFile">มีระบบกักเก็บน้ำฝนเพื่อใช้ประโยชน์</label>
+          </li>
+          <li class="flex items-center">
             <span [ngClass]="customer?.hasWaterSavingToilets ? 'text-green-600' : 'text-gray-400'">
               <i [class]="customer?.hasWaterSavingToilets ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
             </span>
@@ -960,6 +1071,18 @@
             </span>
             <label for="wasteManagementSystemFile">มีระบบการจัดการและคัดแยกขยะ</label>
           </li>
+          <li class="flex items-center">
+            <span [ngClass]="customer?.hasGreenSpace ? 'text-green-600' : 'text-gray-400'">
+              <i [class]="customer?.hasGreenSpace ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
+            </span>
+            <label for="greenSpaceFile">มีพื้นที่สีเขียวในโครงการมากกว่า 30% ของพื้นที่ทั้งหมด</label>
+          </li>
+          <li class="flex items-center">
+            <span [ngClass]="customer?.isNearPublicTransportFile ? 'text-green-600' : 'text-gray-400'">
+              <i [class]="customer?.isNearPublicTransportFile ? 'fas fa-check-square' : 'fa-solid fa-square'"></i>
+            </span>
+            <label for="nearPublicTransportFile">ตั้งอยู่ใกล้ระบบขนส่งสาธารณะในระยะเดินไม่เกิน 500 เมตร</label>
+          </li>
         </ul>
       </div>
     </form>
@@ -974,7 +1097,15 @@
   <main *ngIf="step == 5" class="w-full max-w-4xl bg-white/90 rounded-2xl shadow-xl p-8 mt-5">
       <div class="text-center mx-auto max-w-md">
         <h1 class="text-3xl font-bold mb-4 text-black">ผลการประเมินสินเชื่อเบื้องต้น</h1>
-        <h2 class="text-3xl font-bold mb-4 text-[#2ca4ad]">ผ่าน</h2>
+        <h2
+          class="text-3xl font-bold mb-4"
+          [ngClass]="{
+            'text-[#2ca4ad]': this.status === '0',
+            'text-red-600': this.status === '1'
+          }"
+        >
+          {{ this.status === '0' ? 'ผ่าน' : this.status === '1' ? 'ไม่ผ่าน' : '' }}
+        </h2>
         <h3 class="text-2xl font-bold mb-4 text-black">Ref no. GML{{ customerId.toString().padStart(7, '0') }}</h3>
         <h4 class="text-xl font-bold text-black">กรุณาติดต่อสาขาที่ท่านสะดวกด้วย หมายเลขอ้างอิงนี้</h4>
       </div>
