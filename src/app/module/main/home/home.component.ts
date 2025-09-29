@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../../shared/service/toast-alert.service';
 import { inputConfigTm, selectConfigTm } from '../../../../shared/interface/input.interface';
 import axios from 'axios';
+import { LoanApp, LoanAppService } from '../../../../shared/service/loan-app.service';
 
 interface filePayload { 
   dob: string | null | null
@@ -48,6 +49,8 @@ export class HomeComponent implements OnInit {
   countryDropdownSelectConfig!: selectConfigTm;
   customer: any = null;
   customerId: any = null;
+  apps: LoanApp[] = [];
+  status: string = '';
 
   stepLabels: string[] = [
     'รายละเอียดผลิตภัณฑ์',
@@ -64,7 +67,8 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private alertService: AlertService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private loanService: LoanAppService
   ) {
   }
 
@@ -98,11 +102,14 @@ export class HomeComponent implements OnInit {
       }),
       waterDocs: this.fb.group({
         waterTreatmentSystemFile: [null],
+        rainwaterHarvestingFile: [null],
         waterSavingToiletsFile: [null],
       }),
       materialDocs: this.fb.group({
         ecoFriendlyMaterialsFile: [null],
         wasteManagementSystemFile: [null],
+        greenSpaceFile: [null],
+        nearPublicTransportFile: [null],
       }),
     });
     this.initialComponent();
@@ -145,6 +152,7 @@ export class HomeComponent implements OnInit {
       control.setValue(filePayload);
       control.markAsDirty();
       control.updateValueAndValidity();
+      input.value = '';
     };
     reader.onerror = err =>
       console.error(`Error reading file for ${controlPath}`, err);
@@ -162,12 +170,6 @@ export class HomeComponent implements OnInit {
     if (control) {
       control.setValue(null);
       control.markAsDirty();
-    }
-    const input = document.getElementById(
-      controlPath.includes('.') ? controlPath.split('.').pop()! : controlPath
-    ) as HTMLInputElement | null;
-    if (input) {
-      input.value = '';
     }
   }
 
@@ -235,8 +237,8 @@ export class HomeComponent implements OnInit {
 
     const nestedGroups = {
       energyDocs: ['activeAirflowSystemFile', 'eVChargerFile', 'insulationFile', 'ledLightsFile', 'smartHomeFile', 'solarRooftopFile'],
-      waterDocs: ['waterTreatmentSystemFile', 'waterSavingToiletsFile'],
-      materialDocs: ['ecoFriendlyMaterialsFile', 'wasteManagementSystemFile'],
+      waterDocs: ['waterTreatmentSystemFile', 'rainwaterHarvestingFile', 'waterSavingToiletsFile'],
+      materialDocs: ['ecoFriendlyMaterialsFile', 'wasteManagementSystemFile', 'greenSpaceFile', 'nearPublicTransportFile'],
       debtDocs: ['housing', 'creditCard', 'others'],
     };
 
@@ -324,6 +326,16 @@ export class HomeComponent implements OnInit {
         headers: { 'Content-Type': 'application/json' }
       }
     );
+
+    await this.loanService.loadApps()
+      .then(() => {
+        this.loanService.apps$.subscribe(data => {
+          const filtered = data.filter(app => app.id === this.customerId);
+          this.apps = filtered;
+          this.status = filtered.length ? filtered[0].status : '';
+        });
+      })
+      .catch(err => console.error(err));
 
     this.step++;
     this.progress = (this.step / 5) * 100;
